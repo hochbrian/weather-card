@@ -13,7 +13,8 @@ export default class App extends React.Component {
       connections: '',
       report: {
         currently: {
-          summary: 'loading...'
+          summary: 'loading...',
+          temperature: ''
         },
         minutely: {
           summary: ''
@@ -94,10 +95,17 @@ export default class App extends React.Component {
               <CardText>
                 {this.state.report.hourly.summary}
               </CardText>
+              <div style={{position: 'absolute', bottom: '12.5%', right: '1%', width: '100%'}}>
+                <span className="display-2 d-flex justify-content-end">{Math.round(this.state.report.currently.temperature)}˚</span>
+              </div>
             </CardImgOverlay>
             <CardFooter className="text-muted"><p className="d-flex justify-content-between mx-2"><span><a href="https://darksky.net/poweredby/">Powered By Dark Sky</a></span><span>&copy; {d.getFullYear()} - Brian E Hoch</span></p></CardFooter>
           </Card>
         </div>
+
+        <code>
+          <pre>{JSON.stringify(this.state.report, true, 3)}</pre>
+        </code>
 
       </div>
     );
