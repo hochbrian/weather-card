@@ -1,0 +1,25 @@
+ <!doctype html>
+<html>
+  <head>
+    <title>Weather Card</title>
+    <link rel="stylesheet" href="bs/css/bootstrap.min.css" />
+  </head>
+  <body>
+    <div id='react-container'>
+    </div>
+    <script src="/public/bundle.js"></script>
+    <script src="skycons.js"></script>
+    <script>
+      var icons = new Skycons({"color": "white"}),
+          list  = [
+            "clear-day", "clear-night", "partly-cloudy-day",
+            "partly-cloudy-night", "cloudy", "rain", "sleet", "snow", "wind",
+            "fog"
+          ],
+          i;
+      for(i = list.length; i--; )
+        icons.set(list[i], list[i]);
+      icons.play();
+    </script>
+  </body>
+</html>

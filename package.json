@@ -1,0 +1,51 @@
+{
+  "name": "weather-card",
+  "version": "0.0.1",
+  "description": "A simple and attractive weather app powered by the Dark Sky API.",
+  "scripts": {
+    "start": "node server.js",
+    "lint": "eslint src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hochbrian/weather-card"
+  },
+  "keywords": [
+    "weather",
+    "darksky"
+  ],
+  "author": "Brian E Hoch <brianhoch@me.com> (http://github.com/hochbrian)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hochbrian/weather-card/issues"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.0.20",
+    "babel-eslint": "^4.1.3",
+    "babel-loader": "^6.0.1",
+    "babel-preset-es2015": "^6.0.15",
+    "babel-preset-react": "^6.0.15",
+    "babel-preset-stage-0": "^6.0.15",
+    "eslint": "^1.10.3",
+    "eslint-plugin-react": "^3.6.2",
+    "express": "^4.13.4",
+    "json-loader": "^0.5.4",
+    "react-hot-loader": "^1.3.0",
+    "webpack": "^1.12.2",
+    "webpack-dev-middleware": "^1.6.1",
+    "webpack-hot-middleware": "^2.10.0"
+  },
+  "dependencies": {
+    "moment": "^2.18.1",
+    "react": "^15.4.2",
+    "react-addons-css-transition-group": "^15.5.2",
+    "react-addons-transition-group": "^15.5.2",
+    "react-dom": "^15.4.2",
+    "reactstrap": "^4.5.0",
+    "skycons": "^1.0.0",
+    "socket.io": "1.4.5",
+    "socket.io-client": "1.4.5",
+    "superagent": "^3.5.2"
+  }
+}
