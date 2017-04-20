@@ -103,11 +103,12 @@ export default class App extends React.Component {
           </Card>
         </div>
 
-        <code>
-          <pre>{JSON.stringify(this.state.report, true, 3)}</pre>
-        </code>
-
       </div>
     );
   }
 }
+
+
+//<code>
+//  <pre>{JSON.stringify(this.state.report, true, 3)}</pre>
+//</code>
