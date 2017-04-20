@@ -31,7 +31,7 @@ export default class App extends React.Component {
   }
 
   componentWillMount() {
-      this.socket = io('http://10.0.0.141:3000');
+      this.socket = io('http://localhost:3000');
       this.socket.on('connect', () => { this.setState({ status: 'connected' }) })
       this.socket.on('disconnect', () => { this.setState({ status: 'disconnected' }) })
       this.socket.on('weather-report', (payload) => {
@@ -55,10 +55,10 @@ export default class App extends React.Component {
       case 'Rain':
         this.setState({img: '/img/heavy-rain.jpg', skycon: 'rain'})
         break
-      case 'Mostly Cloudy':
-      case 'Party Cloudy':
+      case 'Partly Cloudy':
         this.setState({img: '/img/cloud.jpg', skycon: 'partly-cloudy-day'})
         break
+      case 'Mostly Cloudy':
       case 'Overcast':
         this.setState({img: '/img/overcast.jpg', skycon: 'cloudy'})
         break
