@@ -35,10 +35,10 @@ export default class App extends React.Component {
       this.socket.on('connect', () => { this.setState({ status: 'connected' }) })
       this.socket.on('disconnect', () => { this.setState({ status: 'disconnected' }) })
       this.socket.on('weather-report', (payload) => {
+        console.log('Update Recieved')
+        console.log(JSON.stringify(payload,true,3))
         this.setState({ report: payload })
         this.setImg(payload.currently.summary)
-        //console.log(JSON.stringify(payload,true,3))
-        console.log('Update Recieved')
       })
       this.socket.on('joined', connections => {
         this.setState({ connections: connections.connections })
@@ -91,7 +91,7 @@ export default class App extends React.Component {
               <CardTitle className="display-4">
                   <Skycon icon={this.state.skycon}/> {this.state.report.currently.summary}
               </CardTitle>
-              <CardSubtitle>{this.state.report.minutely.summary}</CardSubtitle>
+              <CardSubtitle>{(typeof this.state.report.minutely != 'undefined') ? this.state.report.minutely.summary : ''}</CardSubtitle>
               <CardText>
                 {this.state.report.hourly.summary}
               </CardText>
@@ -102,7 +102,6 @@ export default class App extends React.Component {
             <CardFooter className="text-muted"><p className="d-flex justify-content-between mx-2"><span><a href="https://darksky.net/poweredby/">Powered By Dark Sky</a></span><span>&copy; {d.getFullYear()} - Brian E Hoch</span></p></CardFooter>
           </Card>
         </div>
-
       </div>
     );
   }
