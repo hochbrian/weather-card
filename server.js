@@ -10,7 +10,8 @@ var compiler = webpack(config);
 
 var weatherReport = {}
 
-
+// Using Dan Abramov's react-hot-loader with webpack-hot-middleware etc because
+// I like the error handling/warnings it has.
 app.use(require('webpack-dev-middleware')(compiler, {
   publicPath: config.output.publicPath
 }));
@@ -44,7 +45,6 @@ var server = app.listen(3000, function(err) {
     });
 
     socket.on('weather-request', function(payload) {
-      console.log('weather requested');
       socket.emit('weather-report', weatherReport)
     });
 
@@ -56,16 +56,23 @@ var server = app.listen(3000, function(err) {
 
   // Push weather update
   function updateWeather(){
+    // log timestamp of each api call for reference
     var d = moment().format('LTS');
     api.wthr().then(function(response){
       console.log(d, 'Weather JSON received');
       io.sockets.emit('weather-report', response);
       weatherReport = response;
+      // When API returns new weather data broadcast it on all connected sockets
+      // and save data to weatherReport to be able to serve it up for new
+      // connections or for page refreshes without having to make a new API call
     }, function(err){
       console.log(err);
     });
   };
 
+  // get weather at app start and then every 90 seconds. 90 second interval will
+  // result in 40 api calls per hour and 960 over a 24 hour period. This stays
+  // under the 1000/day free limit on the Dark Sky API.
   updateWeather();
   setInterval(updateWeather, 90000);
 
