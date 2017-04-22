@@ -12,13 +12,13 @@ var weatherReport = {}
 
 // Using Dan Abramov's react-hot-loader with webpack-hot-middleware etc because
 // I like the error handling/warnings it has.
-app.use(require('webpack-dev-middleware')(compiler, {
-  publicPath: config.output.publicPath
-}));
+//app.use(require('webpack-dev-middleware')(compiler, {
+//  publicPath: config.output.publicPath
+//}));
 
 app.use(express.static(path.resolve('./public')))
 
-app.use(require('webpack-hot-middleware')(compiler));
+//app.use(require('webpack-hot-middleware')(compiler));
 
 app.get('*', function(req, res) {
   res.sendFile(path.join(__dirname, 'public/index.html'));

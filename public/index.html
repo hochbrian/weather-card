@@ -2,14 +2,14 @@
 <html>
   <head>
     <title>Weather Card</title>
-    <link rel="stylesheet" href="bs/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="fa/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/bs/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/fa/css/font-awesome.min.css">
   </head>
   <body>
     <div id='react-container'>
     </div>
-    <script src="/public/bundle.js"></script>
-    <script src="skycons.js"></script>
+    <script src="/bundle.js"></script>
+    <script src="/skycons.js"></script>
     <script>
       var icons = new Skycons({"color": "white"}),
           list  = [
@@ -21,8 +21,6 @@
       list.map(function(item){
         icons.set(item, item);
       });
-      //for(i = list.length; i--; )
-      //  icons.set(list[i], list[i]);
       icons.play();
     </script>
   </body>
