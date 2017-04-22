@@ -26,6 +26,8 @@ You will need to update the IP address in line 33 of `src/App.js` with your serv
 
 You'll also need to get your own API key from [Dark Sky](https://darksky.net/poweredby/) and enter it as well as your gps in a filed called api-props.js in the root of the project. Here's an example of the contents.
 
+In order to minimize API cost I decided to hardcode the lat/long rather than getting it from geolocation data. This allows the server to cache the current weather report until the next API call and serve it up to new connections without having to hit the API each time. This also prevents an over-excited user from using up all 1000 daily API calls by constantly refreshing the page.
+
 ``` Javascript
 Object.defineProperty(exports, "__esModule", {
   value: true
