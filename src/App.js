@@ -14,7 +14,9 @@ export default class App extends React.Component {
       report: {
         currently: {
           summary: 'loading...',
-          temperature: ''
+          temperature: '',
+          windSpeed: 0,
+          windBearing: 0
         },
         minutely: {
           summary: ''
@@ -23,8 +25,7 @@ export default class App extends React.Component {
           summary: ''
         }
       },
-      img: '/img/snow.jpg',
-      skycon: 'tmp'
+      img: '/img/snow.jpg'
     }
 
     this.setImg = this.setImg.bind(this)
@@ -38,7 +39,7 @@ export default class App extends React.Component {
         console.log('Update Recieved')
         console.log(JSON.stringify(payload,true,3))
         this.setState({ report: payload })
-        this.setImg(payload.currently.summary)
+        this.setImg(payload.currently.icon)
       })
       this.socket.on('joined', connections => {
         this.setState({ connections: connections.connections })
@@ -47,35 +48,38 @@ export default class App extends React.Component {
       this.socket.on('clientDisconnect', connections => { this.setState({ connections: connections.connections }) })
   }
 
-  setImg(current) {
-    switch (current) {
-      case 'Light Rain':
-        this.setState({img: '/img/rain.jpg', skycon: 'rain'})
+  setImg(icon) {
+    switch (icon) {
+      case 'rain':
+        this.setState({img: '/img/rain.jpg'})
         break
-      case 'Rain':
-        this.setState({img: '/img/heavy-rain.jpg', skycon: 'rain'})
+      case 'partly-cloudy-day':
+        this.setState({img: '/img/cloud.jpg'})
         break
-      case 'Partly Cloudy':
-        this.setState({img: '/img/cloud.jpg', skycon: 'partly-cloudy-day'})
+        case 'partly-cloudy-night':
+          this.setState({img: '/img/partly-cloudy-night.jpg'})
+          break
+      case 'cloudy':
+        this.setState({img: '/img/overcast.jpg'})
         break
-      case 'Mostly Cloudy':
-      case 'Overcast':
-        this.setState({img: '/img/overcast.jpg', skycon: 'cloudy'})
+      case 'snow':
+      case 'sleet':
+        this.setState({img: '/img/snow.jpg'})
         break
-      case 'Snow':
-        this.setState({img: '/img/snow.jpg', skycon: 'snow'})
+      case 'fog':
+        this.setState({img: '/img/fog.jpg'})
         break
-      case 'Fog':
-        this.setState({img: '/img/fog.jpg', skycon: 'fog'})
+      case 'wind':
+        this.setState({img: '/img/windy.jpg'})
         break
-      case 'Windy':
-        this.setState({img: '/img/windy.jpg', skycon: 'wind'})
+      case 'clear-day':
+        this.setState({img: '/img/clear.jpg'})
         break
-      case 'Sunny':
-        this.setState({img: '/img/clear.jpg', skycon: 'clear-day'})
+      case 'clear-night':
+        this.setState({img: '/img/clear-night.jpg'})
         break
       default:
-        this.setState({img: '/img/snow.jpg'})
+        this.setState({img: '/img/clear.jpg'})
         console.log('leave as default img')
     }
   }
@@ -89,14 +93,21 @@ export default class App extends React.Component {
             <CardImg width="100%" src={this.state.img}/>
             <CardImgOverlay>
               <CardTitle className="display-4">
-                  <Skycon icon={this.state.skycon}/> {this.state.report.currently.summary}
+                  <Skycon icon={this.state.report.currently.icon}/> {this.state.report.currently.summary}
               </CardTitle>
               <CardSubtitle>{(typeof this.state.report.minutely != 'undefined') ? this.state.report.minutely.summary : ''}</CardSubtitle>
               <CardText>
                 {this.state.report.hourly.summary}
               </CardText>
               <div style={{position: 'absolute', bottom: '12.5%', right: '1%', width: '100%'}}>
-                <span className="display-2 d-flex justify-content-end">{Math.round(this.state.report.currently.temperature)}˚</span>
+                <span className="d-flex justify-content-between">
+                  <span className="d-flex align-items-end xs-mb-2 ml-3">
+                    <h5>{Math.round(this.state.report.currently.windSpeed)}mph <i className="fa fa-long-arrow-up fa-lg mb-1 ml-2" style={{ transform: 'rotate(' + this.state.report.currently.windBearing + 'deg)'}}></i></h5>
+                  </span>
+                  <span className="display-2">
+                    {Math.round(this.state.report.currently.temperature)}˚
+                  </span>
+                </span>
               </div>
             </CardImgOverlay>
             <CardFooter className="text-muted"><p className="d-flex justify-content-between mx-2"><span><a href="https://darksky.net/poweredby/">Powered By Dark Sky</a></span><span>&copy; {d.getFullYear()} - Brian E Hoch</span></p></CardFooter>

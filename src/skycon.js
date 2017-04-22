@@ -22,34 +22,144 @@ export default class Skycon extends React.Component {
   componentWillReceiveProps(newProps) {
     switch (newProps.icon) {
       case 'clear-day':
-        this.setState({ cday: 'd-inline'})
+        this.setState({
+          cday: 'd-inline',
+          cnight: 'hidden-xs-up',
+          pcday: 'hidden-xs-up',
+          pcnight: 'hidden-xs-up',
+          cloud: 'hidden-xs-up',
+          sleet: 'hidden-xs-up',
+          snow: 'hidden-xs-up',
+          wind: 'hidden-xs-up',
+          fog: 'hidden-xs-up',
+          rain: 'hidden-xs-up'
+        })
         break
       case 'clear-night':
-        this.setState({ cnight: 'd-inline'})
+        this.setState({
+          cday: 'hidden-xs-up',
+          cnight: 'd-inline',
+          pcday: 'hidden-xs-up',
+          pcnight: 'hidden-xs-up',
+          cloud: 'hidden-xs-up',
+          sleet: 'hidden-xs-up',
+          snow: 'hidden-xs-up',
+          wind: 'hidden-xs-up',
+          fog: 'hidden-xs-up',
+          rain: 'hidden-xs-up'
+        })
         break
       case 'partly-cloudy-day':
-        this.setState({ pcday: 'd-inline'})
+        this.setState({
+          cday: 'hidden-xs-up',
+          cnight: 'hidden-xs-up',
+          pcday: 'd-inline',
+          pcnight: 'hidden-xs-up',
+          cloud: 'hidden-xs-up',
+          sleet: 'hidden-xs-up',
+          snow: 'hidden-xs-up',
+          wind: 'hidden-xs-up',
+          fog: 'hidden-xs-up',
+          rain: 'hidden-xs-up'
+        })
         break
       case 'partly-cloudy-night':
-        this.setState({ pcnight: 'd-inline'})
+        this.setState({
+          cday: 'hidden-xs-up',
+          cnight: 'hidden-xs-up',
+          pcday: 'hidden-xs-up',
+          pcnight: 'd-inline',
+          cloud: 'hidden-xs-up',
+          sleet: 'hidden-xs-up',
+          snow: 'hidden-xs-up',
+          wind: 'hidden-xs-up',
+          fog: 'hidden-xs-up',
+          rain: 'hidden-xs-up'
+        })
         break
       case 'cloudy':
-        this.setState({ cloud: 'd-inline'})
+        this.setState({
+          cday: 'hidden-xs-up',
+          cnight: 'hidden-xs-up',
+          pcday: 'hidden-xs-up',
+          pcnight: 'hidden-xs-up',
+          cloud: 'd-inline',
+          sleet: 'hidden-xs-up',
+          snow: 'hidden-xs-up',
+          wind: 'hidden-xs-up',
+          fog: 'hidden-xs-up',
+          rain: 'hidden-xs-up'
+        })
         break
       case 'sleet':
-        this.setState({ sleet: 'd-inline'})
+        this.setState({
+          cday: 'hidden-xs-up',
+          cnight: 'hidden-xs-up',
+          pcday: 'hidden-xs-up',
+          pcnight: 'hidden-xs-up',
+          cloud: 'hidden-xs-up',
+          sleet: 'd-inline',
+          snow: 'hidden-xs-up',
+          wind: 'hidden-xs-up',
+          fog: 'hidden-xs-up',
+          rain: 'hidden-xs-up'
+        })
         break
       case 'snow':
-        this.setState({ snow: 'd-inline'})
+        this.setState({
+          cday: 'hidden-xs-up',
+          cnight: 'hidden-xs-up',
+          pcday: 'hidden-xs-up',
+          pcnight: 'hidden-xs-up',
+          cloud: 'hidden-xs-up',
+          sleet: 'hidden-xs-up',
+          snow: 'd-inline',
+          wind: 'hidden-xs-up',
+          fog: 'hidden-xs-up',
+          rain: 'hidden-xs-up'
+        })
         break
       case 'wind':
-        this.setState({ wind: 'd-inline'})
+        this.setState({
+          cday: 'hidden-xs-up',
+          cnight: 'hidden-xs-up',
+          pcday: 'hidden-xs-up',
+          pcnight: 'hidden-xs-up',
+          cloud: 'hidden-xs-up',
+          sleet: 'hidden-xs-up',
+          snow: 'hidden-xs-up',
+          wind: 'd-inline',
+          fog: 'hidden-xs-up',
+          rain: 'hidden-xs-up'
+        })
         break
       case 'fog':
-        this.setState({ fog: 'd-inline'})
+        this.setState({
+          cday: 'hidden-xs-up',
+          cnight: 'hidden-xs-up',
+          pcday: 'hidden-xs-up',
+          pcnight: 'hidden-xs-up',
+          cloud: 'hidden-xs-up',
+          sleet: 'hidden-xs-up',
+          snow: 'hidden-xs-up',
+          wind: 'hidden-xs-up',
+          fog: 'd-inline',
+          rain: 'hidden-xs-up'
+        })
         break
       case 'rain':
-        this.setState({ rain: 'd-inline'})
+        this.setState({
+          cday: 'hidden-xs-up',
+          cnight: 'hidden-xs-up',
+          pcday: 'hidden-xs-up',
+          pcnight: 'hidden-xs-up',
+          cloud: 'hidden-xs-up',
+          sleet: 'hidden-xs-up',
+          snow: 'hidden-xs-up',
+          wind: 'hidden-xs-up',
+          fog: 'hidden-xs-up',
+          rain: 'd-inline'
+        })
         break
     }
   }
