@@ -25,7 +25,8 @@ export default class App extends React.Component {
           summary: ''
         }
       },
-      img: '/img/snow.jpg'
+      img: '/img/snow.jpg',
+      fontColor: ''
     }
 
     this.setImg = this.setImg.bind(this)
@@ -54,20 +55,29 @@ export default class App extends React.Component {
         this.setState({img: '/img/rain.jpg'})
         break
       case 'partly-cloudy-day':
-        this.setState({img: '/img/cloud.jpg'})
+        if (this.state.report.currently.summary === 'Mostly Cloudy') {
+          this.setState({img: '/img/cloud.jpg', fontColor: 'text-muted'})
+        } else {
+          this.setState({img: '/img/partly-cloudy-day.jpg'})
+        }
         break
-        case 'partly-cloudy-night':
+      case 'partly-cloudy-night':
+        if (this.state.report.currently.summary === 'Mostly Cloudy') {
+          this.setState({img: '/img/mostly-cloudy-night.jpg'})
+        } else {
           this.setState({img: '/img/partly-cloudy-night.jpg'})
-          break
+        }
+        break
       case 'cloudy':
         this.setState({img: '/img/overcast.jpg'})
         break
-      case 'snow':
       case 'sleet':
+        this.setState({img: 'img/sleet.jpg', fontColor: 'text-muted'})
+      case 'snow':
         this.setState({img: '/img/snow.jpg'})
         break
       case 'fog':
-        this.setState({img: '/img/fog.jpg'})
+        this.setState({img: '/img/fog.jpg', fontColor: 'text-muted'})
         break
       case 'wind':
         this.setState({img: '/img/windy.jpg'})
@@ -92,11 +102,11 @@ export default class App extends React.Component {
           <Card inverse>
             <CardImg width="100%" src={this.state.img}/>
             <CardImgOverlay>
-              <CardTitle className="display-4">
+              <CardTitle className={"display-4 " + this.state.fontColor}>
                   <Skycon icon={this.state.report.currently.icon}/> {this.state.report.currently.summary}
               </CardTitle>
-              <CardSubtitle>{(typeof this.state.report.minutely != 'undefined') ? this.state.report.minutely.summary : ''}</CardSubtitle>
-              <CardText>
+              <CardSubtitle className={this.state.fontColor}>{(typeof this.state.report.minutely != 'undefined') ? this.state.report.minutely.summary : ''}</CardSubtitle>
+              <CardText className={this.state.fontColor}>
                 {this.state.report.hourly.summary}
               </CardText>
               <div style={{position: 'absolute', bottom: '12.5%', right: '1%', width: '100%'}}>
