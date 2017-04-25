@@ -95,7 +95,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    var d = new Date()
     return (
       <div>
         <div className="col-md-12 col-lg-9 mt-3 mx-auto">
@@ -120,7 +119,7 @@ export default class App extends React.Component {
                 </span>
               </div>
             </CardImgOverlay>
-            <CardFooter className="text-muted"><p className="d-flex justify-content-between mx-2"><span><a href="https://darksky.net/poweredby/">Powered By Dark Sky</a></span><span>&copy; {d.getFullYear()} - Brian E Hoch</span></p></CardFooter>
+            <CardFooter className="text-muted"><p className="d-flex justify-content-between mx-2"><span><a href="https://darksky.net/poweredby/">Powered By Dark Sky</a></span></p></CardFooter>
           </Card>
         </div>
       </div>
