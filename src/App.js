@@ -111,7 +111,7 @@ export default class App extends React.Component {
               <div style={{position: 'absolute', bottom: '12.5%', right: '1%', width: '100%'}}>
                 <span className="d-flex justify-content-between">
                   <span className="d-flex align-items-end xs-mb-2 ml-3">
-                    <h5>{Math.round(this.state.report.currently.windSpeed)}mph <i className="fa fa-long-arrow-up fa-lg mb-1 ml-2" style={{ transform: 'rotate(' + this.state.report.currently.windBearing + 'deg)'}}></i></h5>
+                    <h5>{Math.round(this.state.report.currently.windSpeed)}mph <i className="fa fa-long-arrow-up fa-lg mb-1 ml-2" style={{ transform: 'rotate(' + (this.state.report.currently.windBearing -180) + 'deg)'}}></i></h5>
                   </span>
                   <span className="display-2">
                     {Math.round(this.state.report.currently.temperature)}˚
