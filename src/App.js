@@ -1,8 +1,9 @@
 import React from 'react'
 import io from 'socket.io-client'
-import { Card, CardTitle, CardSubtitle, CardText, CardImg, CardImgOverlay, CardFooter } from 'reactstrap'
+import { Card, CardTitle, CardSubtitle, CardText, CardImg, CardImgOverlay, CardFooter, Badge } from 'reactstrap'
 import Skycon from './skycon'
 import Moon from './lunar'
+import AirBadge from './air'
 
 
 export default class App extends React.Component {
@@ -34,7 +35,16 @@ export default class App extends React.Component {
         }
       },
       img: '/img/snow.jpg',
-      fontColor: ''
+      fontColor: '',
+      air: {
+        data: {
+          current: {
+            pollution: {
+              aqius: 0
+            }
+          }
+        }
+      }
     }
 
     this.setImg = this.setImg.bind(this)
@@ -45,14 +55,19 @@ export default class App extends React.Component {
       this.socket.on('connect', () => { this.setState({ status: 'connected' }) })
       this.socket.on('disconnect', () => { this.setState({ status: 'disconnected' }) })
       this.socket.on('weather-report', (payload) => {
-        console.log('Update Recieved')
+        console.log('Weather Update Recieved')
         //console.log(JSON.stringify(payload,true,3))
         this.setState({ report: payload })
         this.setImg(payload.currently.icon)
       })
+      this.socket.on('air-report', (payload) => {
+        console.log('Air Update Recieved')
+        //console.log(JSON.stringify(payload,true,3))
+        this.setState({ air: payload })
+      })
       this.socket.on('joined', connections => {
         this.setState({ connections: connections.connections })
-        this.socket.emit('weather-request', {})
+        this.socket.emit('data-request', {})
       })
       this.socket.on('clientDisconnect', connections => { this.setState({ connections: connections.connections }) })
   }
@@ -113,10 +128,15 @@ export default class App extends React.Component {
                   <span><Skycon icon={this.state.report.currently.icon}/> {this.state.report.currently.summary}</span>
                   <span><Moon phase={this.state.report.daily.data[0].moonPhase}/></span>
               </CardTitle>
-              <CardSubtitle className={this.state.fontColor}>{(typeof this.state.report.minutely != 'undefined') ? this.state.report.minutely.summary : ''}</CardSubtitle>
-              <CardText className={this.state.fontColor}>
-                {this.state.report.hourly.summary}
-              </CardText>
+              <span className="d-flex justify-content-between">
+                <span>
+                  <CardSubtitle className={this.state.fontColor}>{(typeof this.state.report.minutely != 'undefined') ? this.state.report.minutely.summary : ''}</CardSubtitle>
+                  <CardText className={this.state.fontColor}>
+                    {this.state.report.hourly.summary}
+                  </CardText>
+                </span>
+                <AirBadge aqi={this.state.air.data.current.pollution.aqius} />
+              </span>
               <div style={{position: 'absolute', bottom: '12.5%', right: '1%', width: '100%'}}>
                 <span className="d-flex justify-content-between">
                   <span className="d-flex align-items-end xs-mb-2 ml-3">

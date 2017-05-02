@@ -9,6 +9,8 @@ var app = express();
 var compiler = webpack(config);
 
 var weatherReport = {}
+var airReport = {}
+
 
 // Using Dan Abramov's react-hot-loader with webpack-hot-middleware etc because
 // I like the error handling/warnings it has.
@@ -44,8 +46,9 @@ var server = app.listen(3000, function(err) {
       console.log('Disconnected: %s sockets remaining.', connections.length);
     });
 
-    socket.on('weather-request', function(payload) {
+    socket.on('data-request', function(payload) {
       socket.emit('weather-report', weatherReport)
+      socket.emit('air-report', airReport)
     });
 
     // Add socket to connections array
@@ -70,11 +73,26 @@ var server = app.listen(3000, function(err) {
     });
   };
 
+  function updateAqi(){
+    // log timestamp of each api call for reference
+    var d = moment().format('LTS');
+    api.aqi().then(function(response){
+      console.log(d, 'Air JSON received');
+      io.sockets.emit('air-report', response);
+      airReport = response;
+    }, function(err){
+      console.log(err);
+    });
+  };
+
   // get weather at app start and then every 90 seconds. 90 second interval will
   // result in 40 api calls per hour and 960 over a 24 hour period. This stays
   // under the 1000/day free limit on the Dark Sky API.
   updateWeather();
   setInterval(updateWeather, 90000);
+
+  updateAqi();
+  setInterval(updateAqi, 300000);
 
 
   console.log('Listening at http://localhost:3000/');
