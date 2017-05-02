@@ -2,6 +2,7 @@ import React from 'react'
 import io from 'socket.io-client'
 import { Card, CardTitle, CardSubtitle, CardText, CardImg, CardImgOverlay, CardFooter } from 'reactstrap'
 import Skycon from './skycon'
+import Moon from './lunar'
 
 
 export default class App extends React.Component {
@@ -23,6 +24,13 @@ export default class App extends React.Component {
         },
         hourly: {
           summary: ''
+        },
+        daily: {
+          data: [
+            {
+              moonPhase: 0
+            }
+          ]
         }
       },
       img: '/img/snow.jpg',
@@ -38,7 +46,7 @@ export default class App extends React.Component {
       this.socket.on('disconnect', () => { this.setState({ status: 'disconnected' }) })
       this.socket.on('weather-report', (payload) => {
         console.log('Update Recieved')
-        console.log(JSON.stringify(payload,true,3))
+        //console.log(JSON.stringify(payload,true,3))
         this.setState({ report: payload })
         this.setImg(payload.currently.icon)
       })
@@ -102,8 +110,9 @@ export default class App extends React.Component {
           <Card inverse>
             <CardImg width="100%" src={this.state.img}/>
             <CardImgOverlay>
-              <CardTitle className={"display-4 " + this.state.fontColor}>
-                  <Skycon icon={this.state.report.currently.icon}/> {this.state.report.currently.summary}
+              <CardTitle className={'display-4 ' + this.state.fontColor + 'd-flex justify-content-between'}>
+                  <span><Skycon icon={this.state.report.currently.icon}/> {this.state.report.currently.summary}</span>
+                  <span><Moon phase={this.state.report.daily.data[0].moonPhase}/></span>
               </CardTitle>
               <CardSubtitle className={this.state.fontColor}>{(typeof this.state.report.minutely != 'undefined') ? this.state.report.minutely.summary : ''}</CardSubtitle>
               <CardText className={this.state.fontColor}>
@@ -127,7 +136,6 @@ export default class App extends React.Component {
     );
   }
 }
-
 
 //<code>
 //  <pre>{JSON.stringify(this.state.report, true, 3)}</pre>
