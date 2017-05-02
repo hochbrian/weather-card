@@ -1,6 +1,6 @@
 {
   "name": "weather-card",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "A simple and attractive weather app powered by the Dark Sky API.",
   "scripts": {
     "start": "node server.js",

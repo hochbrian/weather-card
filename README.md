@@ -1,6 +1,6 @@
 # README
 
-## Weather Card 1.0
+## Weather Card 1.1
 
 #### Overview:
 
