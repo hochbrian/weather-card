@@ -6,6 +6,10 @@
 
 A simple and attractive weather app powered by the Dark Sky API.
 
+#### ToDo:
+
+Implement an Air Quality check using the [AirVisual api](https://airvisual.com).
+
 #### Use:
 
 - Clone repository
