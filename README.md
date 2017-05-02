@@ -38,4 +38,5 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.key = 'YOUR_API_KEY_HERE/'; // Be sure to include the trailing '/'
 exports.gps = '40.771516,-73.973188'; // Central Park
+exports.aqiKey = 'your_key_here' // From AirVisual.com
 ```
